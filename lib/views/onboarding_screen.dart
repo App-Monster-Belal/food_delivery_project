@@ -5,19 +5,21 @@ import 'package:food_delivery_project/const/App_colors.dart';
 import 'package:food_delivery_project/user_interface/route/route.dart';
 import 'package:food_delivery_project/views/authentication/registration.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'authentication/login.dart';
 
 
 
 class Onboard extends StatelessWidget {
-  const Onboard({Key? key}) : super(key: key);
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
     return OnBoardingSlider(
       finishButtonText: 'Register',
       onFinish: () {
+        box.write("checked", true);
         Get.toNamed(registration);
       },
       finishButtonStyle: FinishButtonStyle(
@@ -41,6 +43,8 @@ class Onboard extends StatelessWidget {
         ),
       ),
       trailingFunction: () {
+        box.write("checked", true);
+
         Get.toNamed(logIn);
       },
       controllerColor: appColors.blue,

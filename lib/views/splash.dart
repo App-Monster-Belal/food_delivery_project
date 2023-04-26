@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_project/const/App_colors.dart';
 import 'package:food_delivery_project/const/App_name.dart';
 import 'package:food_delivery_project/user_interface/route/route.dart';
+import 'package:food_delivery_project/views/homepage.dart';
 import 'package:food_delivery_project/views/onboarding_screen.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class Splash_screen extends StatefulWidget {
   const Splash_screen({Key? key}) : super(key: key);
@@ -15,14 +17,22 @@ class Splash_screen extends StatefulWidget {
 }
 
 class _Splash_screenState extends State<Splash_screen> {
+  final box= GetStorage();
   choosen_screen(context) {
-    Future.delayed(Duration(seconds: 2),
-        () => Get.toNamed(onBoarding));
+    var value = box.read("checked");
+   print(value);
+   if (value==true){
+     Get.toNamed(home);
+   }else {
+     Get.toNamed(onBoarding);
+   }
+   
   }
 
   @override
   void initState() {
-    choosen_screen(context);
+    Future.delayed(Duration(seconds: 2),
+            () => choosen_screen(context));
     super.initState();
   }
 
